@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+  <div class="container mt-4">
+    <h1>Books</h1>
+    {% for book in books %}
+      <div class="row mb-5">
+        <div class="col-4">
+          <div class="card  p-3">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="https://i.ibb.co/18nWT0b/toppng-com-blank-book-cover-images-with-transparent-background-549x843.png" class="card-img" alt="{{ book.title }}">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ book.title }}</h5>
+                  <h6 class="card-subtitle mb-2">Published: {{ book.publishedDate | date("m/d/Y") }}</h6>
+                  <p class="card-text mb-0">Author: {{ book.author }}</p>
+                  <p class="card-text">ISBN: {{ book.isbn }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-8">
+          <h3>Reviews ({{ book.reviews|length }}):</h3>
+          {% for review  in book.reviews %}
+            <div class="media">
+              <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="64" height="64" class="mr-3"
+                   alt="...">
+              <div class="media-body">
+                <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating }}/10</h5>
+                {{ review.getContent }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
