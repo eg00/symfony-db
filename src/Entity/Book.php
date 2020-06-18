@@ -40,7 +40,7 @@ class Book
     private $isbn;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reviews::class, mappedBy="book", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Reviews::class, mappedBy="book", orphanRemoval=true, fetch="EAGER")
      */
     private $reviews;
 
