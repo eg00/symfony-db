@@ -12,7 +12,7 @@ use Faker\UniqueGenerator;
 
 class BookFixtures extends Fixture
 {
-    protected const FINAL_COUNT = 200;
+    protected const FINAL_COUNT = 10;
 
     /**
      * @var Generator|UniqueGenerator
@@ -55,7 +55,7 @@ class BookFixtures extends Fixture
 
     protected function createReviews(Book $book, ObjectManager $manager): void
     {
-        $count = \random_int(0, 10);
+        $count = \random_int(0, 4);
         for ($i = $count; $i >= 0; $i--) {
             $review = (new Reviews())
                 ->setRevieverName($this->faker->name)
