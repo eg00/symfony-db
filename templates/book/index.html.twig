@@ -5,13 +5,16 @@
 {% block body %}
   <div class="container mt-4">
     <h1>Books</h1>
+    {% include 'pagination.html.twig' %}
     {% for book in books %}
       <div class="row mb-5">
         <div class="col-4">
           <div class="card  p-3">
             <div class="row no-gutters">
               <div class="col-md-4">
-                <img src="https://i.ibb.co/18nWT0b/toppng-com-blank-book-cover-images-with-transparent-background-549x843.png" class="card-img" alt="{{ book.title }}">
+                <img
+                  src="https://i.ibb.co/18nWT0b/toppng-com-blank-book-cover-images-with-transparent-background-549x843.png"
+                  class="card-img" alt="{{ book.title }}">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -41,5 +44,6 @@
 
       </div>
     {% endfor %}
+    {% include 'pagination.html.twig' %}
   </div>
 {% endblock %}
