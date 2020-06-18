@@ -12,7 +12,7 @@ use Faker\UniqueGenerator;
 
 class BookFixtures extends Fixture
 {
-    protected const FINAL_COUNT = 10;
+    protected const FINAL_COUNT = 100;
 
     /**
      * @var Generator|UniqueGenerator
