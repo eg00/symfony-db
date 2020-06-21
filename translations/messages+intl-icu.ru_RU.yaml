@@ -3,3 +3,12 @@ pizza.name: __pizza.name
 pizza.parts: __pizza.parts
 pizza.diameter: __pizza.diameter
 value_with_variable: 'Привет, {name}'
+
+book.header: Книги
+book.published: Дата пубилкации
+book.author: Автор
+book.rewiews: Отзывы
+book.rate: из 10
+
+pagination.previous: Предыдущая
+pagination.next: Следующая
