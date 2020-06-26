@@ -8,6 +8,7 @@ book.header: Книги
 book.published: Дата пубилкации
 book.author: Автор
 book.rewiews: Отзывы
+book.rewiew: отзыв
 book.rate: из 10
 
 pagination.previous: Предыдущая
