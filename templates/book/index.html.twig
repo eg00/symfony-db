@@ -4,7 +4,7 @@
 
 {% block body %}
   <div class="container mt-4">
-    <h1>{{ 'book.header' | trans }}
+    <h1>{{ 'Books' | trans }}
       <a href="{{ path('book_create') }}" class="btn btn-primary">
         {{ 'Create new' | trans }}
       </a>
@@ -25,8 +25,8 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">{{ book.title }}</h5>
-                  <h6 class="card-subtitle mb-2">{{ 'book.published' | trans }}: {{ book.publishedDate | date("m/d/Y") }}</h6>
-                  <p class="card-text mb-0">{{ 'book.author' | trans }}: {{ book.author }}</p>
+                  <h6 class="card-subtitle mb-2">{{ 'Published' | trans }}: {{ book.publishedDate | date("m/d/Y") }}</h6>
+                  <p class="card-text mb-0">{{ 'Author' | trans }}: {{ book.author }}</p>
                   <p class="card-text">ISBN: {{ book.isbn }}</p>
                   <a href="{{ path('book_show', {id: book.id}) }}">{{ 'More' | trans }}</a>
                 </div>
@@ -35,13 +35,13 @@
           </div>
          </div>
         <div class="col-8">
-          <h3>{{'book.rewiews' | trans }}  ({{ ('book.rewiew' | trans)|plural(book.reviews|length) }}):</h3>
+          <h3>{{'Reviews' | trans }}  ({{ ('Review' | trans)|plural(book.reviews|length) }}):</h3>
           {% for review  in book.reviews %}
             <div class="media">
               <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="64" height="64" class="mr-3"
                    alt="...">
               <div class="media-body">
-                <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'book.rate' | trans }}</h5>
+                <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
                 {{ review.getContent }}
               </div>
             </div>

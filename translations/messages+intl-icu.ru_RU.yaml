@@ -4,12 +4,21 @@ pizza.parts: __pizza.parts
 pizza.diameter: __pizza.diameter
 value_with_variable: 'Привет, {name}'
 
-book.header: Книги
-book.published: Дата пубилкации
-book.author: Автор
-book.rewiews: Отзывы
-book.rewiew: отзыв
-book.rate: из 10
+Books: Книги
+Published: Дата пубилкации
+Reviews: Отзывы
+Review: Отзыв
+in 10: из 10
 
 pagination.previous: Предыдущая
 pagination.next: Следующая
+
+#Form and buttons
+Title: Название
+Author: Автор
+Published date: Дата публикации
+Save: Сохранить
+Update: Изменить
+Create new: Добавить
+More: Подробнее
+Back: Назад
