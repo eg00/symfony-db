@@ -4,7 +4,11 @@
 
 {% block body %}
   <div class="container mt-4">
-    <h1>{{ 'book.header' | trans }}</h1>
+    <h1>{{ 'book.header' | trans }}
+      <a href="{{ path('book_create') }}" class="btn btn-primary">
+        {{ 'Create new' | trans }}
+      </a>
+    </h1>
     {% include 'pagination.html.twig' %}
     {% for book in books %}
       <div class="row mb-5">

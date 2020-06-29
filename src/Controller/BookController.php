@@ -56,7 +56,7 @@ class BookController extends AbstractController
             $book = $form->getData();
             $this->bookManager->store($book);
 
-            return $this->redirectToRoute('book_show', ['id'=> $book->getId()]);
+            return $this->redirectToRoute('book_show', ['id' => $book->getId()]);
         }
 
         return $this->render('book/create.html.twig', [
@@ -73,6 +73,30 @@ class BookController extends AbstractController
      */
     public function show(int $id): Response
     {
-        return  $this->render('book/show.html.twig', ['book' => $this->bookManager->get($id)]);
+        return $this->render('book/show.html.twig', ['book' => $this->bookManager->get($id)]);
+    }
+
+    /**
+     * @Route("/book/update/{id<\d+>}", name="book_update")
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
+    public function update(int $id, Request $request): Response
+    {
+        $book = $this->bookManager->get($id);
+        $form = $this->createForm(BookType::class, $book);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $book = $form->getData();
+            $this->bookManager->update($book);
+
+            return $this->redirectToRoute('book_show', ['id' => $book->getId()]);
+        }
+
+        return $this->render('book/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

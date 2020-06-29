@@ -18,7 +18,9 @@
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">{{ book.title }}</h5>
+                  <h5 class="card-title">{{ book.title }}
+                    <a href="{{ path('book_update', {id: book.id}) }}" class="btn btn-primary">{{ 'Update' | trans }}</a>
+                  </h5>
                   <h6 class="card-subtitle mb-2">{{ 'book.published' | trans }}: {{ book.publishedDate | date("m/d/Y") }}</h6>
                   <p class="card-text mb-0">{{ 'book.author' | trans }}: {{ book.author }}</p>
                   <p class="card-text">ISBN: {{ book.isbn }}</p>
