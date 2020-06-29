@@ -4,19 +4,17 @@
 
 {% block body %}
   <div class="container mt-4">
-    <h1>{{ 'book.header' | trans }}</h1>
-    {% include 'pagination.html.twig' %}
-    {% for book in books %}
+<div class="row">
+  <div class="col"><a href="{{ path('book') }}">{{ 'Back' | trans }}</a></div>
+</div>
       <div class="row mb-5">
-        <div class="col-4">
+        <div class="col">
           <div class="card  p-3">
             <div class="row no-gutters">
               <div class="col-md-4">
-                <a href="{{ path('book_show', {id: book.id}) }}">
-                  <img
+                <img
                   src="https://i.ibb.co/18nWT0b/toppng-com-blank-book-cover-images-with-transparent-background-549x843.png"
                   class="card-img" alt="{{ book.title }}">
-                </a>
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -24,14 +22,15 @@
                   <h6 class="card-subtitle mb-2">{{ 'book.published' | trans }}: {{ book.publishedDate | date("m/d/Y") }}</h6>
                   <p class="card-text mb-0">{{ 'book.author' | trans }}: {{ book.author }}</p>
                   <p class="card-text">ISBN: {{ book.isbn }}</p>
-                  <a href="{{ path('book_show', {id: book.id}) }}">{{ 'More' | trans }}</a>
                 </div>
               </div>
             </div>
           </div>
          </div>
-        <div class="col-8">
-          <h3>{{'book.rewiews' | trans }}  ({{ ('book.rewiew' | trans)|plural(book.reviews|length) }}):</h3>
+      </div>
+    <div class="row">
+        <div class="col">
+          <h3>{{'book.rewiews' | trans }} :  ({{ ('book.rewiew' | trans)|plural(book.reviews|length) }}):</h3>
           {% for review  in book.reviews %}
             <div class="media">
               <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="64" height="64" class="mr-3"
@@ -44,7 +43,5 @@
           {% endfor %}
         </div>
       </div>
-    {% endfor %}
-    {% include 'pagination.html.twig' %}
   </div>
 {% endblock %}
