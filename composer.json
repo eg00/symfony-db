@@ -16,11 +16,12 @@
     "symfony/orm-pack": "^1.0",
     "symfony/translation": "5.1.*",
     "symfony/twig-pack": "^1.0",
-    "symfony/yaml": "5.1.*",
-    "wapmorgan/morphos": "^3.2",
     "symfony/validator": "5.1.*",
+    "symfony/yaml": "5.1.*",
     "twig/cssinliner-extra": "^3.0",
-    "twig/inky-extra": "^3.0"
+    "twig/inky-extra": "^3.0",
+    "twig/string-extra": "^3.0",
+    "wapmorgan/morphos": "^3.2"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.3",

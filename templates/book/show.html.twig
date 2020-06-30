@@ -39,7 +39,8 @@
                    alt="...">
               <div class="media-body">
                 <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
-                {{ review.getContent }}
+                {{ review.getContent|u.truncate(50, '...' ) }}
+                <a href="{{ path('review_show', {bookId: book.id, id: review.id}) }}">{{ 'more' | trans }}</a>
               </div>
             </div>
           {% endfor %}

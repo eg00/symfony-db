@@ -38,11 +38,12 @@
           <h3>{{'Reviews' | trans }}  ({{ ('Review' | trans)|plural(book.reviews|length) }}):</h3>
           {% for review  in book.reviews %}
             <div class="media">
-              <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="64" height="64" class="mr-3"
+              <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="48" height="48" class="mr-3"
                    alt="...">
               <div class="media-body">
                 <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
-                {{ review.getContent }}
+                {{ review.getContent|u.truncate(50, '...' ) }}
+                <a href="{{ path('review_show', {bookId: book.id, id: review.id}) }}">{{ 'more' | trans }}</a>
               </div>
             </div>
           {% endfor %}

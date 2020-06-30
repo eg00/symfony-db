@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Reviews;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +19,20 @@ class ReviewsRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Reviews::class);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Collection
+     */
+    public function findByBookId($id): Collection
+    {
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->andWhere('r.book_id = :id')
+            ->setParameter('id', $id);
+
+        return new ArrayCollection($queryBuilder->getQuery()->getResult() ?? []);
     }
 
     // /**
