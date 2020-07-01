@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container mt-4">
+    <div class="row mb-3">
+      <div class="col"><a href="{{ path('reviews', {bookId: bookId}) }}">{{ 'Back' | trans }}</a></div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="media">
+          <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="64" height="64" class="mr-3"
+               alt="...">
+          <div class="media-body">
+            <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
+            {{ review.getContent }}
+            <a class="d-block" href="{{ path('review_update', {bookId: bookId, id:review.id}) }}">{{ 'Update' | trans }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

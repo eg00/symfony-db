@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block body %}
+  <div class="container mt-4">
+<div class="row">
+  <div class="col"><a href="{{ path('book') }}">{{ 'Back' | trans }}</a></div>
+</div>
+      <div class="row mb-5">
+        <div class="col">
+          <div class="card  p-3">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img
+                  src="https://i.ibb.co/18nWT0b/toppng-com-blank-book-cover-images-with-transparent-background-549x843.png"
+                  class="card-img" alt="{{ book.title }}">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ book.title }}
+                    <a href="{{ path('book_update', {id: book.id}) }}" class="btn btn-primary">{{ 'Update' | trans }}</a>
+                  </h5>
+                  <h6 class="card-subtitle mb-2">{{ 'Published' | trans }}: {{ book.publishedDate | date("m/d/Y") }}</h6>
+                  <p class="card-text mb-0">{{ 'Author' | trans }}: {{ book.author }}</p>
+                  <p class="card-text">ISBN: {{ book.isbn }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+      </div>
+    <div class="row">
+        <div class="col">
+          <h3>{{'Reviews' | trans }} :  ({{ ('Review' | trans)|plural(book.reviews|length) }}):</h3>
+          {% for review  in book.reviews %}
+            <div class="media">
+              <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="64" height="64" class="mr-3"
+                   alt="...">
+              <div class="media-body">
+                <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
+                {{ review.getContent|u.truncate(50, '...' ) }}
+                <a href="{{ path('review_show', {bookId: book.id, id: review.id}) }}">{{ 'more' | trans }}</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+  </div>
+{% endblock %}

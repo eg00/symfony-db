@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block body %}
+  <div class="container mt-4">
+    <div class="row mb-3">
+      <div class="col"><a href="{{ path('book_show', {id: book.id}) }}">{{ 'Back' | trans }}</a></div>
+    </div>
+    <div class="row">
+        <div class="col">
+          <h3>{{'Reviews' | trans }} :  ({{ ('Review' | trans)|plural(reviews|length) }}):</h3>
+          {% for review  in reviews %}
+            <div class="media">
+              <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="64" height="64" class="mr-3"
+                   alt="...">
+              <div class="media-body">
+                <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
+                {{ review.getContent|u.truncate(50, '...' ) }}
+                <a href="{{ path('review_show', {bookId: book.id, id: review.id}) }}">{{ 'more' | trans }}</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+  </div>
+{% endblock %}

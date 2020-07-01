@@ -1,0 +1,21 @@
+{% if(pages)> 1 %}
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item {{ page == 1 ? 'disabled' }}">
+        <a class="page-link" href="{{ path('book', {page: page-1 < 1 ? 1 : page-1}) }}">
+          {{ 'pagination.previous' | trans }}
+        </a>
+      </li>
+      {% for i in 1..pages %}
+        <li class="page-item {{ page == i ? 'active' }}">
+          <a class="page-link" href="{{ path('book', {page: i}) }}">{{ i }}</a>
+        </li>
+      {% endfor %}
+      <li class="page-item {{ page == pages ? 'disabled' }}">
+        <a class="page-link" href="{{ path('book', {page: page+1 <= pages ? page+1 : page}) }}">
+          {{ 'pagination.next' | trans }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+{% endif %}
