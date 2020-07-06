@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReviewsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ReviewsRepository::class)
@@ -14,6 +15,7 @@ class Reviews
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"show"})
      */
     private $id;
 
@@ -24,21 +26,25 @@ class Reviews
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"show"})
      */
     private $reviever_name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"show"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"show"})
      */
     private $rating;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"show"})
      */
     private $published_date;
 
