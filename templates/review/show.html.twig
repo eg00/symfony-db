@@ -12,7 +12,7 @@
           <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="64" height="64" class="mr-3"
                alt="...">
           <div class="media-body">
-            <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
+            <h5 class="mt-0">{{ review.getOwner.name }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
             {{ review.getContent }}
             <a class="d-block" href="{{ path('review_update', {bookId: bookId, id:review.id}) }}">{{ 'Update' | trans }}</a>
           </div>

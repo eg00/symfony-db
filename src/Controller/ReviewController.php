@@ -10,16 +10,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class ReviewController extends AbstractController
 {
     private ReviewManagerInterface $reviewManager;
     private BookManagerInterface $bookManager;
+    private $security;
 
-    public function __construct(ReviewManagerInterface $reviewManager, BookManagerInterface $bookManager)
+    public function __construct(ReviewManagerInterface $reviewManager, BookManagerInterface $bookManager, Security $security)
     {
         $this->reviewManager = $reviewManager;
         $this->bookManager = $bookManager;
+        $this->security = $security;
     }
 
     /**
@@ -70,14 +73,13 @@ class ReviewController extends AbstractController
         $this->checkIfBookExists($bookId);
 
         $review = new Reviews();
-        $form = $this->createForm(ReviewType::class, $review,
-            ['attr' => ['bookId' => $bookId],
-            ]);
+        $form = $this->createForm(ReviewType::class, $review);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $review = $form->getData();
-
+            $review->setBook($this->bookManager->get($bookId));
+            $review->setOwner($this->security->getUser());
             $this->reviewManager->store($review);
 
             return $this->redirectToRoute('book_show', ['id' => $bookId]);
@@ -101,13 +103,13 @@ class ReviewController extends AbstractController
     {
         $this->checkIfBookExists($bookId);
         $review = $this->reviewManager->get($id);
-        $form = $this->createForm(ReviewType::class, $review,
-            ['attr' => ['bookId' => $bookId],
-            ]);
+        $form = $this->createForm(ReviewType::class, $review);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $review = $form->getData();
+            $review->setBook($this->bookManager->get($bookId));
+            $review->setOwner($this->security->getUser());
             $this->reviewManager->update($review);
 
             return $this->redirectToRoute('book_show', ['id' => $bookId]);

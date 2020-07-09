@@ -25,12 +25,6 @@ class Reviews
     private $book_id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"show"})
-     */
-    private $reviever_name;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"show"})
      */
@@ -54,6 +48,12 @@ class Reviews
      */
     private $book;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reviews")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,18 +67,6 @@ class Reviews
     public function setBookId(int $book_id): self
     {
         $this->book_id = $book_id;
-
-        return $this;
-    }
-
-    public function getRevieverName(): ?string
-    {
-        return $this->reviever_name;
-    }
-
-    public function setRevieverName(string $reviever_name): self
-    {
-        $this->reviever_name = $reviever_name;
 
         return $this;
     }
@@ -127,6 +115,18 @@ class Reviews
     public function setBook(?Book $book): self
     {
         $this->book = $book;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

@@ -5,9 +5,11 @@
 {% block body %}
   <div class="container mt-4">
     <h1>{{ 'Books' | trans }}
+      {% if is_granted('ROLE_ADMIN') %}
       <a href="{{ path('book_create') }}" class="btn btn-primary">
         {{ 'Create new' | trans }}
       </a>
+      {% endif %}
     </h1>
     {% include 'pagination.html.twig' %}
     {% for book in books %}
@@ -41,7 +43,7 @@
               <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="48" height="48" class="mr-3"
                    alt="...">
               <div class="media-body">
-                <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
+                <h5 class="mt-0">{{ review.getOwner.name }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
                 {{ review.getContent|u.truncate(50, '...' ) }}
                 <a href="{{ path('review_show', {bookId: book.id, id: review.id}) }}">{{ 'more' | trans }}</a>
               </div>

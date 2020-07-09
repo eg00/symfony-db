@@ -19,7 +19,9 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">{{ book.title }}
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('book_update', {id: book.id}) }}" class="btn btn-primary">{{ 'Update' | trans }}</a>
+                    {% endif %}
                   </h5>
                   <h6 class="card-subtitle mb-2">{{ 'Published' | trans }}: {{ book.publishedDate | date("m/d/Y") }}</h6>
                   <p class="card-text mb-0">{{ 'Author' | trans }}: {{ book.author }}</p>
@@ -33,12 +35,15 @@
     <div class="row">
         <div class="col">
           <h3>{{'Reviews' | trans }} :  ({{ ('Review' | trans)|plural(book.reviews|length) }}):</h3>
+          {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('review_create', {bookId: book.id}) }}" class="mb-3 btn btn-primary">{{ 'Create new' | trans }}</a>
+          {% endif %}
           {% for review  in book.reviews %}
             <div class="media">
               <img src="https://i.ibb.co/z8pG6mC/pngkit-blank-face-png-3022217.png" width="64" height="64" class="mr-3"
                    alt="...">
               <div class="media-body">
-                <h5 class="mt-0">{{ review.getRevieverName }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
+                <h5 class="mt-0">{{ review.getOwner.name }} {{ review.getRating|numeral }} {{ 'in 10' | trans }}</h5>
                 {{ review.getContent|u.truncate(50, '...' ) }}
                 <a href="{{ path('review_show', {bookId: book.id, id: review.id}) }}">{{ 'more' | trans }}</a>
               </div>

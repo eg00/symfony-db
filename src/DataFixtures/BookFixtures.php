@@ -5,12 +5,13 @@ namespace App\DataFixtures;
 use App\Entity\Book;
 use App\Entity\Reviews;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 use Faker\UniqueGenerator;
 
-class BookFixtures extends Fixture
+class BookFixtures extends Fixture implements DependentFixtureInterface
 {
     protected const FINAL_COUNT = 100;
 
@@ -19,6 +20,9 @@ class BookFixtures extends Fixture
      */
     private $faker;
 
+    /**
+     * @var array
+     */
     protected array $books = [];
 
     public function __construct()
@@ -57,8 +61,9 @@ class BookFixtures extends Fixture
     {
         $count = \random_int(0, 4);
         for ($i = $count; $i >= 0; $i--) {
+            $user = $this->getReference(AppUserFixture::getReferenceKey($i % 10));
             $review = (new Reviews())
-                ->setRevieverName($this->faker->name)
+                ->setOwner($user)
                 ->setContent($this->faker->realText)
                 ->setRating(\random_int(1, 10))
                 ->setPublishedDate($this->faker->dateTimeBetween($book->getPublishedDate(), 'now'));
@@ -66,5 +71,12 @@ class BookFixtures extends Fixture
             $manager->persist($review);
         }
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            AppUserFixture::class
+        ];
     }
 }
