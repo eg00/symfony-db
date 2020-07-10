@@ -70,6 +70,8 @@ class ReviewController extends AbstractController
      */
     public function create(int $bookId, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $this->checkIfBookExists($bookId);
 
         $review = new Reviews();
@@ -101,6 +103,8 @@ class ReviewController extends AbstractController
      */
     public function update(int $bookId, int $id, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $this->checkIfBookExists($bookId);
         $review = $this->reviewManager->get($id);
         $form = $this->createForm(ReviewType::class, $review);

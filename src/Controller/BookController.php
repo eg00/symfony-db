@@ -48,6 +48,8 @@ class BookController extends AbstractController
      */
     public function create(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
 
@@ -84,6 +86,8 @@ class BookController extends AbstractController
      */
     public function update(int $id, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $book = $this->bookManager->get($id);
         $form = $this->createForm(BookType::class, $book);
 
