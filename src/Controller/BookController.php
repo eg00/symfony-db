@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Form\BookType;
 use App\Service\BookManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,10 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     private BookManagerInterface $bookManager;
+    private LoggerInterface $logger;
 
-    public function __construct(BookManagerInterface $bookManager)
+    public function __construct(BookManagerInterface $bookManager, LoggerInterface $logger)
     {
         $this->bookManager = $bookManager;
+        $this->logger = $logger;
     }
 
     /**
@@ -73,6 +76,7 @@ class BookController extends AbstractController
      */
     public function show(int $id): Response
     {
+        $this->logger->info("book ${id} requested");
         return $this->render('book/show.html.twig', ['book' => $this->bookManager->get($id)]);
     }
 
@@ -91,6 +95,7 @@ class BookController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $book = $form->getData();
             $this->bookManager->update($book);
+            $this->logger->info("book ${id} updated");
 
             return $this->redirectToRoute('book_show', ['id' => $book->getId()]);
         }
